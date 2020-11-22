@@ -4,3 +4,4 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def new
     @user
 end
+end
