@@ -51,19 +51,22 @@ end
  end
  
  it "passwordが5文字以下では登録できない" do
-  @user.password = "aaaaa"
+  @user.password = "ha000"
+  @user.password_confirmation = "ha000"
   @user.valid?
-  expect(@user.errors.full_messages)
+  expect(@user.errors.full_messages).to include("Password is too short (minimum is 6 characters)")
  end
 
   it "passwordに半角数字が含まれない場合登録できない" do
     @user.password = "aaaaaa"
+    @user.password_confirmation = "aaaaaa"
     @user.valid?
     expect(@user.errors.full_messages).to include("Password は英数混合で入力してください。")
   end
  
   it "passwordに半角英語が含まれない場合登録できない" do
     @user.password = "222222"
+    @user.password_confirmation = "222222"
     @user.valid?
     expect(@user.errors.full_messages).to include("Password は英数混合で入力してください。")
   end
