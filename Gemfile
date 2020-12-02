@@ -35,6 +35,7 @@ group :development, :test do
   gem 'pry-rails' 
   gem 'factory_bot_rails'
   gem 'faker'
+end
 
 group :development do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
@@ -65,4 +66,3 @@ gem 'devise'
 gem 'mini_magick'
 gem 'image_processing', '~> 1.2'
 gem 'active_hash'
-end
