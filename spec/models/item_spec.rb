@@ -63,8 +63,20 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include("Category Select")
       end
 
+      it "category_idの1番を選択すると登録できない" do
+        @item.category_id = "1"
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Category Select")
+      end
+
       it "item_status_idが空では登録できない" do
         @item.item_status_id = ""
+        @item.valid?
+       expect(@item.errors.full_messages).to include("Item status Select")
+      end
+
+      it "item_status_idの1番を選択すると登録できない" do
+        @item.item_status_id = "1"
         @item.valid?
        expect(@item.errors.full_messages).to include("Item status Select")
       end
@@ -72,7 +84,12 @@ RSpec.describe Item, type: :model do
       it "item_fee_status_idが空では登録できない" do
         @item.item_fee_status_id = ""
         @item.valid?
+        expect(@item.errors.full_messages).to include("Item fee status Select")
+      end
 
+      it "item_fee_status_idの1番を選択すると登録できない" do
+        @item.item_fee_status_id = "1"
+        @item.valid?
         expect(@item.errors.full_messages).to include("Item fee status Select")
       end
 
@@ -82,8 +99,14 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include("Item prefecture Select")
       end
 
-      it "item_prefecture_idが空では登録できない" do
-        @item.item_scheduled_delivery_id = ""
+      it "item_prefecture_idの1番を選択すると登録できない" do
+        @item.item_prefecture_id = "1"
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Item prefecture Select")
+      end
+
+      it "item_prefecture_idの1番を選択すると登録できない" do
+        @item.item_scheduled_delivery_id = "1"
         @item.valid?
         expect(@item.errors.full_messages).to include("Item scheduled delivery Select")
       end

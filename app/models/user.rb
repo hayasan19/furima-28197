@@ -5,8 +5,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
          has_many :items
          with_options presence: true do
-         validates :nickname, presence: true
-         validates :birthday, presence: true
+         validates :nickname
+         validates :birthday
          end
          with_options presence: true, format: { with: /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]{6,100}+\z/i, message: 'は英数混合で入力してください。'} do
          validates :password
