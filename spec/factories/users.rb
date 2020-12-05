@@ -9,5 +9,6 @@ FactoryBot.define do
       first_name_kana       {"カタカナ"}
       last_name_kana        {"カタカナ"}
       birthday              {"1985-11-02"}
+      # association :item
     end
   end
