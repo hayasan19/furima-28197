@@ -39,7 +39,7 @@ end
   def destroy
     if @item.user_id == current_user.id
     @item.destroy
-  end
+    end
     redirect_to items_path 
   end
 
