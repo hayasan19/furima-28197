@@ -7,13 +7,14 @@ class Item < ApplicationRecord
   belongs_to :item_fee_status
   belongs_to :item_prefecture
   belongs_to :item_scheduled_delivery
+  has_one :order
 
   with_options presence: true do
   validates :image
   validates :name, length: {maximum: 40}
   validates :text, length: {maximum: 1000}
   validates :price, inclusion: { in: 300..9999999,message: 'Out of setting range' }
-end
+  end
 
     #カテゴリーの選択が「---」の時は保存できないようにするOut of setting range
     with_options numericality: { other_than: 1, message: "Select"} do
