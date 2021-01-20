@@ -9,6 +9,11 @@ describe '購入画面' do
  it "すべての値が正しく入力されていれば購入できる" do
   expect(@order_address).to be_valid
  end
+
+ it "建物名が抜けていても登録できること" do
+  @order_address.building_name = ""
+  expect(@order_address).to be_valid
+ end
  
  it "postal_codeが空だと購入できない" do
   @order_address.postal_code = ""
@@ -71,6 +76,12 @@ it "phone_numberが12桁以上であれば購入できない" do
 
 it "phone_numberに -(ハイフン)が入ると購入できない" do
   @order_address.phone_number = "111-111-111"
+  @order_address.valid?
+  expect(@order_address.errors.full_messages).to include("Phone number Input only number")
+ end
+
+ it "phone_numberは英数混合では登録できないこと" do
+  @order_address.phone_number = "aaaaaaaa111"
   @order_address.valid?
   expect(@order_address.errors.full_messages).to include("Phone number Input only number")
  end
