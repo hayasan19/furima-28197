@@ -39,12 +39,6 @@ it "item_prefecture_idの1番を選択すると購入できない" do
   expect(@order_address.errors.full_messages).to include("Item prefecture Select")
  end
  
-it "category_idの1番を選択すると購入できない" do
-  @order_address.item_prefecture_id = "1"
-  @order_address.valid?
-  expect(@order_address.errors.full_messages).to include("Item prefecture Select")
- end
-
 it "addressが空だと購入できない" do
   @order_address.address = ""
   @order_address.valid?
