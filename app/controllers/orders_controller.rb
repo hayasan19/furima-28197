@@ -1,13 +1,13 @@
 class OrdersController < ApplicationController
-  before_action :move_to_signed_in
+  before_action :move_to_signed_in 
+  before_action :set_item
   
   def index
     @order_address = OrderAddress.new
-    @items = Item.find(params[:item_id])
     if @items.user_id == current_user.id
       redirect_to root_path
     end
-    @items = Item.find(params[:item_id])
+
     if @items.order != nil
       redirect_to root_path
     end
@@ -43,6 +43,10 @@ class OrdersController < ApplicationController
       redirect_to  '/users/sign_in'
     end
   end
+
+  def set_item
+    @items = Item.find(params[:item_id])
+ end
 end
 
 
