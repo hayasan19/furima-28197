@@ -6,15 +6,22 @@ RSpec.describe OrderAddress, type: :model do
  end
 
 describe '購入画面' do
+  context "購入ができるとき" do
  it "すべての値が正しく入力されていれば購入できる" do
   expect(@order_address).to be_valid
  end
 
- it "建物名が抜けていても登録できること" do
+ it "建物名が抜けていても購入できること" do
   @order_address.building_name = ""
   expect(@order_address).to be_valid
  end
+
+ it "phone_numberが11桁以内なら購入できる" do
+  @order_address.phone_number = "11111111111"
+   expect(@order_address).to be_valid
+ end
  
+   context "購入ができないとき" do
  it "postal_codeが空だと購入できない" do
   @order_address.postal_code = ""
   @order_address.valid?
@@ -57,10 +64,7 @@ it "phone_numberが空だと購入できない" do
   expect(@order_address.errors.full_messages).to include("Phone number can't be blank")
  end
 
-it "phone_numberが11桁以内なら登録できる" do
-  @order_address.phone_number = "11111111111"
-   expect(@order_address).to be_valid
- end
+
 
 it "phone_numberが12桁以上であれば購入できない" do
   @order_address.phone_number = "111111111111"
@@ -74,7 +78,7 @@ it "phone_numberに -(ハイフン)が入ると購入できない" do
   expect(@order_address.errors.full_messages).to include("Phone number Input only number")
  end
 
- it "phone_numberは英数混合では登録できないこと" do
+ it "phone_numberは英数混合では登録できない" do
   @order_address.phone_number = "aaaaaaaa111"
   @order_address.valid?
   expect(@order_address.errors.full_messages).to include("Phone number Input only number")
@@ -84,6 +88,8 @@ it "tokenが空だと購入できない" do
   @order_address.token = ""
   @order_address.valid?
   expect(@order_address.errors.full_messages).to include("Token can't be blank")
+ end
+ end
  end
  end
 end

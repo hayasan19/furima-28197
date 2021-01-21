@@ -82,7 +82,6 @@ end
 it "first_nameが空だと登録できないこと" do
   @user.first_name = ""
   @user.valid?
-  binding.pry
   expect(@user.errors.full_messages).to include("First name can't be blank")
 end
 

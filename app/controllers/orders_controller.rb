@@ -1,17 +1,13 @@
 class OrdersController < ApplicationController
-  before_action :move_to_signed_in 
+  before_action :authenticate_user!
   before_action :set_item
   
   def index
     @order_address = OrderAddress.new
-    if @items.user_id == current_user.id
+    if @items.user_id == current_user.id || @items.order != nil
       redirect_to root_path
     end
-
-    if @items.order != nil
-      redirect_to root_path
-    end
-    end
+  end
 
   def create
     @order_address = OrderAddress.new(order_params)
@@ -36,12 +32,6 @@ class OrdersController < ApplicationController
       card: order_params[:token],    # カードトークン
       currency: 'jpy'                 # 通貨の種類（日本円）
     )
-  end
-
-  def move_to_signed_in
-    unless user_signed_in?
-      redirect_to  '/users/sign_in'
-    end
   end
 
   def set_item
